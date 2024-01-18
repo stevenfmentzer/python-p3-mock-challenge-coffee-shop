@@ -58,6 +58,14 @@ class Customer:
     def create_order(self, coffee, price):
         return Order(self, coffee, price)
     
+    @classmethod
+    def most_aficionado(cls, coffee):
+        all_customers = [order.customer for order in Order.all if order.coffee == coffee]
+        if all_customers:
+            return max(all_customers, key = lambda customer: all_customers.count(customer))
+        else: 
+            return None
+    
 class Order:
 
     all = [] 
